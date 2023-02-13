@@ -1,17 +1,33 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>AR Example</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-  </head>
-  <body style="margin:0;">
-    <a-scene embedded arjs>
-      <a-marker type='pattern' url='patt.patt'>
-        <a-box position='0 0.5 0' material='color: green;'></a-box>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+<head>
+    <title>AR</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule="" src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<model-viewer
+        ar id="viewer"
+        ar-modes="webxr scene-viewer quick-look"
+        ar-scale="auto"
+        ar-placement="wall"
+        camera-controls=""
+        quick-look-browsers="safari chrome"
+        src="./Astronaut.glb"
+        ar-status="not-presenting"
+>
+    <button
+            slot="ar-button"
+            style="background-color: transparent; border-radius: 4px; border: none; position: absolute; bottom: 24px; right: 24px;"
+    >
+        <img src="./ar.png" alt=""/>
+    </button>
+</model-viewer>
+<script>
+   const viewer = document.getElementById('viewer');
+   viewer.addEventListener('load', function() {
+      viewer.activateAR && viewer.activateAR();
+   });
+</script>
+</body>
 </html>
